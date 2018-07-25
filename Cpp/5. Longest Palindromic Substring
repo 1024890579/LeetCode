@@ -1,0 +1,46 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int maxn = 1010;
+        int dp[maxn][maxn];
+        int len = s.length();
+        int maxlen=1,star=0;
+        for(int i=0;i<len;i++)
+        {
+            dp[i][1]=1;
+        }
+        for(int i=0;i<len-1;i++)
+        {
+            if(s[i]==s[i+1])
+            {
+                dp[i][2]=1;
+                if(maxlen<2)
+                {
+                    maxlen=2;
+                    star=i;
+                }
+            }
+            else 
+                dp[i][2]=0;
+        }
+        for(int j=3;j<=len;j++)
+        {
+            for(int i=0;i+j-1<len;i++)
+            {
+                if(s[i]==s[i+j-1]&&dp[i+1][j-2]==1)
+                {
+                    dp[i][j]=1;
+                    if(maxlen<j)
+                    {
+                        maxlen=j;
+                        star=i;
+                    }
+                }else
+                {
+                    dp[i][j]=0;
+                }
+            }
+        }
+        return s.substr(star, maxlen);
+    }
+};
