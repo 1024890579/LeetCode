@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int myAtoi(string str) {
+        string minstr="2147483648",maxstr="2147483647";
+        int minval=-2147483648, maxval=2147483647;
+        string numstr="";
+        while(str[0]==' '&&str.length()>0)
+            str.erase(str.begin());
+        int flag=0;
+        if((str[0]=='-'||str[0]=='+')&&str.length()>1)
+        {
+            if(str[0]=='-')flag=1;
+            str.erase(str.begin());
+            while(str[0]=='0'&&str.length()>0)str.erase(str.begin());
+            int i=0;
+            while(i<str.length()&&str[i]>='0'&&str[i]<='9')
+                numstr+=str[i++];
+        }else if(str[0]>='0'&&str[0]<='9')
+        {
+            while(str[0]=='0'&&str.length()>0)str.erase(str.begin());
+            int i=0;
+            while(i<str.length()&&str[i]>='0'&&str[i]<='9')
+                numstr+=str[i++];
+        }
+        if(numstr.length()==0)return 0;
+        else if(flag==1&&(numstr.length()>minstr.length()||(numstr.length()==minstr.length()&&numstr>=minstr))) return minval;
+        else if(flag==0&&(numstr.length()>maxstr.length()||(numstr.length()==maxstr.length()&&numstr>=maxstr))) return maxval;
+        else
+        {
+            int ans=0;
+            for(int i=0;i<numstr.length();i++)
+            {
+                ans=ans*10+(numstr[i]-'0');
+            }
+            if(flag==1)ans=-ans;
+            return ans;
+        }
+    }
+};
