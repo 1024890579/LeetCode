@@ -1,0 +1,102 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+       /* string ans="";
+        while(num)
+        {
+            if(num/1000>0)
+            {
+                for(int i=0;i<num/1000;i++)
+                {
+                    ans+='M';
+                }
+                num%=1000;
+            }else if(num/100>0)
+            {
+                int temp=num/100;
+                if(temp<4)
+                {
+                    for(int i=0;i<temp;i++)
+                    {
+                        ans+='C';
+                    }
+                }else if(temp==4)
+                {
+                    ans+="CD";
+                }else if(temp<9)
+                {
+                    ans+='D';
+                    for(int i=5;i<temp;i++)
+                    {
+                        ans+='C';
+                    }
+                }else if(temp==9)
+                {
+                    ans+="CM";
+                }
+                num%=100;
+            }else if(num/10>0)
+            {
+                int temp=num/10;
+                if(temp<4)
+                {
+                    for(int i=0;i<temp;i++)
+                    {
+                        ans+='X';
+                    }
+                }else if(temp==4)
+                {
+                    ans+="XL";
+                }else if(temp<9)
+                {
+                    ans+='L';
+                    for(int i=5;i<temp;i++)
+                    {
+                        ans+='X';
+                    }
+                }else if(temp==9)
+                {
+                    ans+="XC";
+                }
+                num%=10;
+            }else if(num>0)
+            {
+                int temp=num;
+                if(temp<4)
+                {
+                    for(int i=0;i<temp;i++)
+                    {
+                        ans+='I';
+                    }
+                }else if(temp==4)
+                {
+                    ans+="IV";
+                }else if(temp<9)
+                {
+                    ans+='V';
+                    for(int i=5;i<temp;i++)
+                    {
+                        ans+='I';
+                    }
+                }else if(temp==9)
+                {
+                    ans+="IX";
+                }
+                num%=1;
+            }
+        }
+        return ans;*/
+        string result = "";
+        int a[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        string b[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int index = 0, cnt;
+        while(num > 0) {
+            cnt = num / a[index];
+            while(cnt--)
+                result += b[index];
+            num = num % a[index];
+            index++;
+        }// by https://www.liuchuo.net/archives/3122
+        return result;
+    }
+};
