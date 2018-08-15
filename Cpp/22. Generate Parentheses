@@ -1,0 +1,20 @@
+class Solution {
+public:
+    void dfs(vector<string> &str, string substr, int left, int right)
+    {
+        if(right==0)
+        {
+            str.push_back(substr);
+            return;
+        }
+        if(left>0)dfs(str,substr+'(',left-1,right);
+        if(right>left)dfs(str, substr+')',left,right-1);
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string> str;
+        if(n==0)return str;
+        string substr="(";
+        dfs(str,substr,n-1,n);
+        return str;
+    }
+};
